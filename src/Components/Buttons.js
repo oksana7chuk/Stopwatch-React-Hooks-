@@ -1,11 +1,14 @@
 import React from "react";
 import styles from "./Buttons.module.css";
 
-const Buttons = ({ handleStart, handleStop, handleReset }) => {
+const Buttons = ({ handleStart, handleWait, handleStop, handleReset }) => {
   return (
     <div className={styles.buttonsWrap}>
       <button className={styles.button} onClick={handleStart}>
         Start
+      </button>
+      <button className={styles.button} onClick={handleWait}>
+        Wait
       </button>
       <button className={styles.button} onClick={handleStop}>
         Stop

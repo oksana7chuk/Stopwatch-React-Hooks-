@@ -8,7 +8,8 @@ const Stopwatch = () => {
   const [onWait, setOnWait] = useState(false);
 
   let timer;
-  const handleStart = (e) => {
+  const handleStart = () => setIsActive(true);
+  const handleWait = (e) => {
     clearTimeout(timer);
     if (e.detail === 1) {
       timer = setTimeout(() => {
@@ -47,6 +48,7 @@ const Stopwatch = () => {
       <Timer time={time} />
       <Buttons
         handleStart={handleStart}
+        handleWait={handleWait}
         handleStop={handleStop}
         handleReset={handleReset}
       />

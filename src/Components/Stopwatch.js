@@ -5,10 +5,19 @@ import styles from "./Stopwatch.module.css";
 const Stopwatch = () => {
   const [time, setTime] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const [buttonName, setButtonName] = useState("Start");
   const [onWait, setOnWait] = useState(false);
 
+  const handleStartStop = () => {
+    setIsActive((prevState) => !prevState);
+    if (buttonName === "Stop") {
+      setTime(0);
+      setIsActive(false);
+    } else {
+      setIsActive(true);
+    }
+  };
   let timer;
-  const handleStart = () => setIsActive(true);
   const handleWait = (e) => {
     clearTimeout(timer);
     if (e.detail === 1) {
@@ -22,13 +31,10 @@ const Stopwatch = () => {
     }
   };
 
-  const handleStop = () => {
-    setIsActive(false);
-    setTime(0);
-  };
   const handleReset = () => setTime(0);
 
   useEffect(() => {
+    !isActive ? setButtonName("Start") : setButtonName("Stop");
     let interval = null;
     if (isActive) {
       interval = setInterval(() => {
@@ -44,12 +50,12 @@ const Stopwatch = () => {
 
   return (
     <div className={styles.container}>
-      <p className={styles.title}>STOPWATCH</p>
+      <p className={styles.title}>MY REACT STOPWATCH</p>
       <Timer time={time} />
       <Buttons
-        handleStart={handleStart}
+        buttonName={buttonName}
+        handleStartStop={handleStartStop}
         handleWait={handleWait}
-        handleStop={handleStop}
         handleReset={handleReset}
       />
     </div>
